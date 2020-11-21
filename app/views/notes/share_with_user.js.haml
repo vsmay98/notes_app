@@ -1,0 +1,9 @@
+$(".notice").remove();
+$("#display_error").removeClass("hidden");
+$(".error_#{@note.id}").append("<div class='notice'> #{@message}");
+- if @error 
+  $(".error_#{@note.id}").css("color","red");
+- else
+  $(".error_#{@note.id}").css("color","green");
+  $("#email").val('');
+$("#email").focus();

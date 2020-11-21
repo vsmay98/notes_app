@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"}
+    %title NotesApp
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .header_home.row
+      .title_resize
+        = link_to 'Notes', root_path
+      - if user_signed_in?
+        %nav.navbar.bg-light.signup_component
+          -if current_user.admin_role?
+            = button_to 'Admin', all_notes_notes_path, method: :get, class: 'btn btn-outline-primary', style: "margin-right: 10px;"
+          = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger', id: "logout_button"
+      - else
+        %nav.navbar.bg-light.signup_component
+          = button_to 'Sign Up', new_user_registration_path, method: :get, class: 'btn btn-outline-primary', style: "margin-right: 10px;"
+          = button_to 'Sign In', new_user_session_path, method: :get, class: 'btn btn-outline-secondary'
+    %br
+    - if notice  
+      %p.notice.alert.alert-success= notice
+    -if alert
+      %p.alert.alert-danger= alert
+    %main{:class => "#{controller.controller_name}"}
+      = yield

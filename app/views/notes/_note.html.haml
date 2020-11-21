@@ -1,0 +1,42 @@
+-if notes.length > 0
+  %ul.list-group
+    %li.list-group-item
+      %table.table.table-striped.table-bordered{style: "width: -webkit-fill-available;overflow-wrap: break-word;"}
+        %thead
+          %tr.d-flex
+            %th.col-3 Title
+            %th.col-4 Description
+            %th.col-2 Owner
+            %th.col-3{colspan: 3} Actions
+
+        %tbody
+          - notes.each do |note|
+            %tr.d-flex
+              %td.col-3= note.title
+              %td.col-4= note.description
+              %td.col-2= note.user.email
+              %td.col-3
+                = link_to 'Update', edit_note_path(note), class: "btn btn-primary"
+                -if show_share
+                  = link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+                
+                  %button.btn.btn-warning{"data-target": "#invite-modal-#{note.id}", 'data-toggle':'modal'} Share
+                  .modal.fade{id: "invite-modal-#{note.id}",role: 'dialog'}
+                    .modal-dialog
+                      .modal-content
+                        .modal-header
+                          %h5.text-muted= "Share Note #{note.title}"
+                          %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
+                            %span{"aria-hidden": "true"} &times;
+                        .modal-body.text-center
+                          = form_tag(share_with_user_notes_path,:remote => true) do
+                            .container
+                              #display_error.hidden{:class => "error_#{note.id}"}
+                              .field.form-group.input_field_small
+                                = label_tag :email, 'User Email:'
+                                = text_field_tag :email, params[:email], :class => "form-control"
+                              = hidden_field_tag :id, note.id
+                              .actions
+                                = submit_tag "share", :class => "btn btn-success", :value => "Share"
+-else
+  There are no notes

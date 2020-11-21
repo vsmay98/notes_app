@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @note.title
+%p
+  %b Description:
+  = @note.description
+%p
+  %b User:
+  = @note.user.email
+
+= link_to 'Edit', edit_note_path(@note), :class => "btn btn-primary"
+= link_to 'Back', notes_path, :class => "btn btn-secondary"

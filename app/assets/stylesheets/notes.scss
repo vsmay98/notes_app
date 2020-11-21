@@ -1,0 +1,58 @@
+// Place all the styles related to the notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.header_home {
+  width: 100%;
+  background-color: #E0EEEE;
+  .title_resize {
+    font-size: 30px;
+    text-align: left;
+    width: 70%;
+    padding-left: 3rem;
+    padding-top: 0.75rem;
+    margin-bottom: 0.5em;
+    text-decoration: none;
+    a {
+      text-decoration: none;
+      color : black;
+    }
+  }
+  .header_right {
+    width: 30%;
+    text-align: right;
+    padding-right: -5rem;
+    display: flow-root;
+    margin: auto;
+    #logout_button {
+      margin-right: 3rem;
+      margin-top:1rem;
+    }
+  }
+}
+.update_note_text_area {
+  min-height: 16rem;
+}
+.signup_component {
+  text-align: center;
+  margin-left: auto;
+  ul.navbar-nav {
+    margin:0 auto;
+  }
+}
+
+.input_field_small {
+  font-size: large;
+  .form-control {
+    width: 90%;
+  }
+}
+
+a:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.list-group-item{
+  padding: inherit;
+}

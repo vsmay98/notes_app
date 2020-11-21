@@ -1,0 +1,21 @@
+%head
+  = stylesheet_link_tag 'notes', media: 'all', |
+      'data-turbolinks-track': 'reload'
+
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.nav-item
+    %a.nav-link.active{"data-toggle" => "tab", :href => "#my_notes"}= "My Notes (#{@notes.length})"
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#contributor_notes"}= "Shared With Me (#{@shared_notes.length})"
+
+%br
+
+.tab-content
+  #my_notes.container.tab-pane.active{style: "max-width: inherit;"}
+    = render partial: '/notes/note', locals:{notes: @notes, show_share: true}
+
+  #contributor_notes.container.tab-pane.fade{style: "max-width: inherit;"}
+    = render partial: '/notes/note', locals:{notes: @shared_notes, show_share: false}
+
+
+= link_to 'Create New Note', new_note_path, class: "btn btn-primary"

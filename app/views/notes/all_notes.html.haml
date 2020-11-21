@@ -1,0 +1,21 @@
+%head
+  = stylesheet_link_tag 'notes', media: 'all', |
+      'data-turbolinks-track': 'reload'
+
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#all_notes"}= "All Notes (#{@all_notes.length})"
+
+%br
+
+.tab-content
+  #all_notes.container.tab-pane.active{style: "max-width: inherit;"}
+    = form_tag(all_notes_notes_path, method: :get) do
+      .container{style: "display: flex; margin-left: 0"}
+        .field.form-group.input_field_small
+          = select_tag :filter_user_id,options_for_select(@all_user, @user_selected),prompt: 'Select User'  ,class: 'form-control'
+        .actions
+          = submit_tag "Filter", :class => "btn btn-success", :value => "Filter"
+    = render partial: '/notes/note', locals:{notes: @all_notes, show_share: true}
+
+= link_to 'Create New Note', new_note_path, class: "btn btn-primary"
