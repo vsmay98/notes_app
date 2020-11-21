@@ -57,7 +57,6 @@ gem "haml-rails", "~> 2.0"
 
 gem 'devise'
 gem 'omniauth-facebook'
-# gem 'cancancan'
 
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
