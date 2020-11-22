@@ -78,12 +78,12 @@ class NotesController < ApplicationController
   def share_with_user
     if params[:email].present?
       user = User.find_by_email params[:email]
-      if user && current_user!=user
+      if user && @note.user!=user
         SharedNote.where(note: @note, user: user).first_or_create
         @error, @message = false, "Note was successfully shared with #{user.email}."
       else
         @error = true
-        @message = current_user==user ? 'Cannot share with yourself' : 'User not found'
+        @message = @note.user==user ? "#{params[:email]} is the owner of this note" : 'User not found'
       end
       respond_to do |format|
         format.js { render file: '/notes/share_with_user.js', :content_type => 'text/javascript'}
