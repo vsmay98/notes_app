@@ -11,10 +11,10 @@
 %br
 
 .tab-content
-  #my_notes.container.tab-pane.active{style: "max-width: inherit;"}
+  #my_notes.tab-pane.active{style: "max-width: inherit;"}
     = render partial: '/notes/note', locals:{notes: @notes, show_share: true}
 
-  #contributor_notes.container.tab-pane.fade{style: "max-width: inherit;"}
+  #contributor_notes.tab-pane.fade{style: "max-width: inherit;"}
     = render partial: '/notes/note', locals:{notes: @shared_notes, show_share: false}
 
 
